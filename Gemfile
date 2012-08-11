@@ -2,6 +2,11 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.6'
 gem 'heroku'
 #gem 'sqlite3'
+
+# build api
+gem 'grape'
+gem 'rocket_pants', '~> 1.0'
+
 gem 'yaml_db'
 gem 'pg'
 gem 'haml'
