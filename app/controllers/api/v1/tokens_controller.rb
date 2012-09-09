@@ -1,6 +1,6 @@
 # coding: utf-8
 	class Api::V1::TokensController  < ApplicationController
-	    #skip_before_filter :verify_authenticity_token
+	    skip_before_filter :verify_authenticity_token
 	    respond_to :json
 	    def index
 	    	render :json => {:name => "David"}.to_json

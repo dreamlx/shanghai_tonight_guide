@@ -9,6 +9,7 @@ Rails3BootstrapDeviseCancan::Application.routes.draw do
 	namespace :api do
 		namespace :v1 do
 			resources :tokens
+			resources :girls
 		end		
 	end
 end
