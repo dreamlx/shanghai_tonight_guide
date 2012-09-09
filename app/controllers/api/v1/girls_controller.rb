@@ -8,6 +8,10 @@ class Api::V1::GirlsController < ApplicationController
     render :json=>{:response => 'ok',:girls=>@girls}
   end
 
+  def new
+  	@girl = Girl.new
+  	render :json=>{:girl=>@girl}
+  end
   def create
   	girl = params[:girl]
   	girl.save
