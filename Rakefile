@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-TonightGuide::Application.load_tasks
+Rails3BootstrapDeviseCancan::Application.load_tasks

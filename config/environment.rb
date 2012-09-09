@@ -2,4 +2,4 @@
 require File.expand_path('../application', __FILE__)
 
 # Initialize the rails application
-TonightGuide::Application.initialize!
+Rails3BootstrapDeviseCancan::Application.initialize!

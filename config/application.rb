@@ -15,7 +15,7 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
-module TonightGuide
+module Rails3BootstrapDeviseCancan
   class Application < Rails::Application
 
     # don't generate RSpec tests for views and helpers
@@ -76,5 +76,3 @@ module TonightGuide
     config.assets.version = '1.0'
   end
 end
-
-require 'api'
