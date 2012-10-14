@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  before_update :set_private_token
   rolify
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -14,5 +15,10 @@ class User < ActiveRecord::Base
     self.update_attribute(:private_token, random_key)
   end 
   
+  private
+  
+  def set_private_token
+    self.private_token = self.authentication_token
+  end
   
 end
