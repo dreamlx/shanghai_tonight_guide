@@ -3,9 +3,10 @@ class Api::V1::GirlsController < ApplicationController
 	before_filter :verify_authenticity_token
 	respond_to :json
   def index
-    @girls = Girl.all
+     @items = Girl.order(:name).page(params[:page])
 
-    render :json=>{:response => 'ok',:girls=>@girls}
+    render :json=>{:response => 'ok',:message => 'get all records',:result => @items, :last_page => @items.num_pages, :current_page => params[:page].to_i}
+  
   end
 
   def new

@@ -11,13 +11,13 @@ class Api::V1::TokensController  < ApplicationController
     password = params[:user][:password]
     nickname = params[:user][:name]
     if request.format != :json
-      render :status=>406, :json=>{:message=>"The request must be json"}
+      render :status=>406, :json=>{:error=>"The request must be json"}
       return
     end
 	 
     if email.nil? or password.nil?
       render :status=>400,
-      :json=>{:message=>"The request must contain the user email and password."}
+      :json=>{:error=>"The request must contain the user email and password."}
       return
     end
 	 
@@ -25,7 +25,7 @@ class Api::V1::TokensController  < ApplicationController
 	 
     if @user.nil?
       #logger.info("User #{email} failed signin, user cannot be found.")
-      render :status=>401, :json=>{:message=>"Invalid email or passoword."}
+      render :status=>401, :json=>{:error=>"Invalid email or passoword."}
       return
     end
 	 
@@ -34,7 +34,7 @@ class Api::V1::TokensController  < ApplicationController
 	 
     if not @user.valid_password?(password)
       #logger.info("User #{email} failed signin, password \"#{password}\" is invalid")
-      render :status=>401, :json=>{:message=>"Invalid email or password."}
+      render :status=>401, :json=>{:error=>"Invalid email or password."}
     else
       render :json => { :response => 'ok', :user=>@user,:auth_token => @user.authentication_token }.to_json, :status => :ok	
       #render :status=>200, :json=>{:token=>@user.authentication_token}
@@ -45,7 +45,7 @@ class Api::V1::TokensController  < ApplicationController
     @user=User.find_by_authentication_token(params[:id])
     if @user.nil?
       #logger.info(“Token not found.”)
-      render :status=>404, :json => {:message=>"Invalid token"}.to_json
+      render :status=>404, :json => {:error=>"Invalid token"}.to_json
     else
       @user.reset_authentication_token!
       render :status=>200, :json=>{:token=>params[:id]}.to_json

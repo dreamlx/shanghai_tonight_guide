@@ -3,9 +3,10 @@ class Api::V1::CategoriesController < ApplicationController
 	before_filter :verify_authenticity_token
 	respond_to :json
   def index
-    @items = Category.all
+    @items = Category.order(:name).page(params[:page])
 
-    render :json=>{:response => 'ok',:message => 'get all records',:result=>@items}
+    render :json=>{:response => 'ok',:message => 'get all records',:result => @items, :last_page => @items.num_pages, :current_page => params[:page].to_i}
+  
   end
 
   def new
