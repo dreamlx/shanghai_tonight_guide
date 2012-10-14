@@ -1,0 +1,66 @@
+						api 名稱     action  路徑(.json)                           真實執行的controller function，你不用管 
+        new_user_session GET    /users/sign_in(.:format)              devise/sessions#new
+            user_session POST   /users/sign_in(.:format)              devise/sessions#create
+    destroy_user_session DELETE /users/sign_out(.:format)             devise/sessions#destroy
+           user_password POST   /users/password(.:format)             devise/passwords#create
+       new_user_password GET    /users/password/new(.:format)         devise/passwords#new
+      edit_user_password GET    /users/password/edit(.:format)        devise/passwords#edit
+                         PUT    /users/password(.:format)             devise/passwords#update
+cancel_user_registration GET    /users/cancel(.:format)               devise/registrations#cancel
+       user_registration POST   /users(.:format)                      devise/registrations#create
+   new_user_registration GET    /users/sign_up(.:format)              devise/registrations#new
+  edit_user_registration GET    /users/edit(.:format)                 devise/registrations#edit
+                         PUT    /users(.:format)                      devise/registrations#update
+                         DELETE /users(.:format)                      devise/registrations#destroy
+                   users GET    /users(.:format)                      users#index
+                    user GET    /users/:id(.:format)                  users#show
+           api_v1_tokens GET    /api/v1/tokens(.:format)              api/v1/tokens#index
+                         POST   /api/v1/tokens(.:format)              api/v1/tokens#create
+        new_api_v1_token GET    /api/v1/tokens/new(.:format)          api/v1/tokens#new
+       edit_api_v1_token GET    /api/v1/tokens/:id/edit(.:format)     api/v1/tokens#edit
+            api_v1_token GET    /api/v1/tokens/:id(.:format)          api/v1/tokens#show
+                         PUT    /api/v1/tokens/:id(.:format)          api/v1/tokens#update
+                         DELETE /api/v1/tokens/:id(.:format)          api/v1/tokens#destroy
+            api_v1_girls GET    /api/v1/girls(.:format)               api/v1/girls#index
+                         POST   /api/v1/girls(.:format)               api/v1/girls#create
+         new_api_v1_girl GET    /api/v1/girls/new(.:format)           api/v1/girls#new
+        edit_api_v1_girl GET    /api/v1/girls/:id/edit(.:format)      api/v1/girls#edit
+             api_v1_girl GET    /api/v1/girls/:id(.:format)           api/v1/girls#show
+                         PUT    /api/v1/girls/:id(.:format)           api/v1/girls#update
+                         DELETE /api/v1/girls/:id(.:format)           api/v1/girls#destroy
+           api_v1_places GET    /api/v1/places(.:format)              api/v1/places#index
+                         POST   /api/v1/places(.:format)              api/v1/places#create
+        new_api_v1_place GET    /api/v1/places/new(.:format)          api/v1/places#new
+       edit_api_v1_place GET    /api/v1/places/:id/edit(.:format)     api/v1/places#edit
+            api_v1_place GET    /api/v1/places/:id(.:format)          api/v1/places#show
+                         PUT    /api/v1/places/:id(.:format)          api/v1/places#update
+                         DELETE /api/v1/places/:id(.:format)          api/v1/places#destroy
+       api_v1_categories GET    /api/v1/categories(.:format)          api/v1/categories#index
+                         POST   /api/v1/categories(.:format)          api/v1/categories#create
+     new_api_v1_category GET    /api/v1/categories/new(.:format)      api/v1/categories#new
+    edit_api_v1_category GET    /api/v1/categories/:id/edit(.:format) api/v1/categories#edit
+         api_v1_category GET    /api/v1/categories/:id(.:format)      api/v1/categories#show
+                         PUT    /api/v1/categories/:id(.:format)      api/v1/categories#update
+                         DELETE /api/v1/categories/:id(.:format)      api/v1/categories#destroy
+        api_v1_provinces GET    /api/v1/provinces(.:format)           api/v1/provinces#index
+                         POST   /api/v1/provinces(.:format)           api/v1/provinces#create
+     new_api_v1_province GET    /api/v1/provinces/new(.:format)       api/v1/provinces#new
+    edit_api_v1_province GET    /api/v1/provinces/:id/edit(.:format)  api/v1/provinces#edit
+         api_v1_province GET    /api/v1/provinces/:id(.:format)       api/v1/provinces#show
+                         PUT    /api/v1/provinces/:id(.:format)       api/v1/provinces#update
+                         DELETE /api/v1/provinces/:id(.:format)       api/v1/provinces#destroy
+           api_v1_cities GET    /api/v1/cities(.:format)              api/v1/cities#index
+                         POST   /api/v1/cities(.:format)              api/v1/cities#create
+         new_api_v1_city GET    /api/v1/cities/new(.:format)          api/v1/cities#new
+        edit_api_v1_city GET    /api/v1/cities/:id/edit(.:format)     api/v1/cities#edit
+             api_v1_city GET    /api/v1/cities/:id(.:format)          api/v1/cities#show
+                         PUT    /api/v1/cities/:id(.:format)          api/v1/cities#update
+                         DELETE /api/v1/cities/:id(.:format)          api/v1/cities#destroy
+            api_v1_areas GET    /api/v1/areas(.:format)               api/v1/areas#index
+                         POST   /api/v1/areas(.:format)               api/v1/areas#create
+         new_api_v1_area GET    /api/v1/areas/new(.:format)           api/v1/areas#new
+        edit_api_v1_area GET    /api/v1/areas/:id/edit(.:format)      api/v1/areas#edit
+             api_v1_area GET    /api/v1/areas/:id(.:format)           api/v1/areas#show
+                         PUT    /api/v1/areas/:id(.:format)           api/v1/areas#update
+                         DELETE /api/v1/areas/:id(.:format)           api/v1/areas#destroy
+
