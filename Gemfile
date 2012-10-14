@@ -23,5 +23,5 @@ gem "launchy", ">= 2.1.0", :group => :test
 gem "devise", ">= 2.1.2"
 gem "cancan", ">= 1.6.8"
 gem "rolify", ">= 3.1.0"
-gem "rails-admin"
+gem "rails_admin"
 gem "bootstrap-sass", ">= 2.0.4.0"
