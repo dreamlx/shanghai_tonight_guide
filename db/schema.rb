@@ -11,13 +11,54 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120909090313) do
+ActiveRecord::Schema.define(:version => 20121014065005) do
+
+  create_table "areas", :force => true do |t|
+    t.string   "area"
+    t.integer  "city_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "categories", :force => true do |t|
+    t.string   "category"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "cities", :force => true do |t|
+    t.string   "city"
+    t.integer  "province_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "girls", :force => true do |t|
     t.string   "name"
     t.integer  "age"
     t.string   "livein"
     t.text     "desc"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "places", :force => true do |t|
+    t.string   "place_name"
+    t.integer  "area_id"
+    t.string   "address"
+    t.integer  "category_id"
+    t.integer  "user_id"
+    t.text     "desciption"
+    t.string   "glat"
+    t.string   "glng"
+    t.decimal  "price"
+    t.string   "phone"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "provinces", :force => true do |t|
+    t.string   "province"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -48,6 +89,7 @@ ActiveRecord::Schema.define(:version => 20120909090313) do
     t.datetime "updated_at",                             :null => false
     t.string   "name"
     t.string   "authentication_token"
+    t.string   "private_token"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

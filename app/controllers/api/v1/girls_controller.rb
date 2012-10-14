@@ -1,6 +1,6 @@
 #coding: utf-8
 class Api::V1::GirlsController < ApplicationController
-	#before_filter :verify_authenticity_token
+	before_filter :verify_authenticity_token
 	respond_to :json
   def index
     @girls = Girl.all
