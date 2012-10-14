@@ -232,6 +232,7 @@ DEPENDENCIES
   haml
   heroku
   jquery-rails
+  kaminari
   launchy (>= 2.1.0)
   pg
   rails (= 3.2.6)
