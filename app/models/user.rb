@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
   private
   
   def set_private_token
+    self.ensure_authentication_token!
     self.private_token = self.authentication_token
   end
   
