@@ -5,7 +5,10 @@ class Api::V1::PlacesController < ApplicationController
   def index
     @items = Place.order(:name).page(params[:page])
 
-    render :json=>{:response => 'ok',:message => 'get all records',:result => @items, :last_page => @items.num_pages, :current_page => params[:page].to_i}
+    render :json=>{:response => 'ok',:message => 'get all records',
+      :result => @items, :last_page => @items.num_pages, 
+      :current_page => params[:page].to_i
+    }
   end
 
   def new
