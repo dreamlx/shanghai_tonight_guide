@@ -16,6 +16,7 @@ class Place < ActiveRecord::Base
   
   belongs_to :area
   belongs_to :category
+  has_one :photo_thumb, :as => :assetable, :class_name => 'PlacePhoto'
   
   mount_uploader :photo, PlacePhotoUploader
   paginates_per 10
@@ -37,7 +38,8 @@ class Place < ActiveRecord::Base
       field :phone do
         label "聯繫電話"
       end
-    end  
+    end
+
   end
 
 end

@@ -2,3 +2,10 @@
 <% @users.each do |user| %>
   <p>User: <%=link_to user.name, user %></p>
 <% end %>
+
+<h3>admin</h3>
+<%= link_to "Admin", "admin" %>
+
+<h3>Routes</h3>
+<%= link_to "routes", "home/route_map" %>
+

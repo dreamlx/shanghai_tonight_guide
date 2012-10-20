@@ -3,4 +3,8 @@ class HomeController < ApplicationController
   def index
     @users = User.all
   end
+  
+  def route_map
+    @route_map = `rake routes`
+  end
 end
