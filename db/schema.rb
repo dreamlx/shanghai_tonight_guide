@@ -11,7 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121016040621) do
+ActiveRecord::Schema.define(:version => 20121106084341) do
+
+  create_table "albums", :force => true do |t|
+    t.string   "title"
+    t.text     "desc"
+    t.integer  "user_id"
+    t.integer  "place_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -40,6 +49,15 @@ ActiveRecord::Schema.define(:version => 20121016040621) do
     t.text     "desc"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "photos", :force => true do |t|
+    t.string   "title"
+    t.text     "desc"
+    t.integer  "album_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "photo"
   end
 
   create_table "places", :force => true do |t|
@@ -104,6 +122,7 @@ ActiveRecord::Schema.define(:version => 20121016040621) do
     t.string   "name"
     t.string   "authentication_token"
     t.string   "private_token"
+    t.string   "avatar"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
