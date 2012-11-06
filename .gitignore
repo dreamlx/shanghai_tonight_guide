@@ -15,6 +15,7 @@ capybara-*.html
 **.orig
 rerun.txt
 pickle-email-*.html
+/public/uploads
 =======
 #----------------------------------------------------------------------------
 # Ignore these files when commiting to a git repository.
