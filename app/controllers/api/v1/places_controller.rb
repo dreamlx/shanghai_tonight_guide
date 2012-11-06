@@ -15,7 +15,10 @@ class Api::V1::PlacesController < ApplicationController
   	render :nothing, :status => 403
   end
   def create
-  	render :nothing, :status => 403
+    @place = Place.new(params[:place])
+    @place.save
+    render :json => { :response => 'ok', :place=>@place}.to_json, :status => :ok      
+  	#render :nothing, :status => 403
   end
 
   def show

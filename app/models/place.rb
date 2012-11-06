@@ -16,7 +16,7 @@ class Place < ActiveRecord::Base
   
   belongs_to :area
   belongs_to :category
-  has_one :photo_thumb, :as => :assetable, :class_name => 'PlacePhoto'
+  #has_one :photo_thumb, :as => :assetable, :class_name => 'PlacePhoto'
   
   mount_uploader :photo, PlacePhotoUploader
   paginates_per 10
