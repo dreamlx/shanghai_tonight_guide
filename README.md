@@ -1,7 +1,9 @@
-#shanghai_tonight_guide
+shanghai_tonight_guide
 ======================
 
-##ios app server
+#ios app server
 
-* hot to get photo.url?
-	比如 Place.first.photo.thumb.url 就是 thumb的url
+#u = User.first
+#u.avatar.url # => '/url/to/file.png'
+#u.avatar.thumb.url => '用户头像thumb url'
+#u.avatar.current_path # => 'path/to/file.png'

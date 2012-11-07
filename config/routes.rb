@@ -11,6 +11,10 @@ Rails3BootstrapDeviseCancan::Application.routes.draw do
 
   resources :areas
 
+  resources :albums
+
+  resources :photos
+
   #authenticated :user do
   #	root :to => 'home#index'
   #end
@@ -34,6 +38,14 @@ Rails3BootstrapDeviseCancan::Application.routes.draw do
       resources :cities
 
       resources :areas
+
+      resources :users    
+
+      resources :albums         
+
+      resources :photos         
+
+      resources :comments         
 
     end		
   end
