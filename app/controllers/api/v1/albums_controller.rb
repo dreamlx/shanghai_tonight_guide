@@ -33,7 +33,7 @@ class Api::V1::AlbumsController < ApplicationController
     user = User.find_by_authentication_token(params[:auth_token])
     @album = user.albums.find(params[:id])  
 
-    render :json=>{:response => 'ok',:message => 'get one record',:result=>@comment}
+    render :json=>{:response => 'ok',:message => 'get one record',:result=>@album}
   end
 
 
