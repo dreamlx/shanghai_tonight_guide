@@ -41,6 +41,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def destroy
-  	render :nothing, :status => 403
+  	  user = User.find(params[:id])
+    user.destroy
   end
 end
