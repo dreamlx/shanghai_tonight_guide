@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121106084341) do
+ActiveRecord::Schema.define(:version => 20121108090453) do
 
   create_table "albums", :force => true do |t|
     t.string   "title"
@@ -42,6 +42,20 @@ ActiveRecord::Schema.define(:version => 20121106084341) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "comments", :force => true do |t|
+    t.string   "title",            :limit => 50, :default => ""
+    t.text     "comment"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.integer  "user_id"
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
+  end
+
+  add_index "comments", ["commentable_id"], :name => "index_comments_on_commentable_id"
+  add_index "comments", ["commentable_type"], :name => "index_comments_on_commentable_type"
+  add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
+
   create_table "girls", :force => true do |t|
     t.string   "name"
     t.integer  "age"
@@ -54,11 +68,15 @@ ActiveRecord::Schema.define(:version => 20121106084341) do
   create_table "photos", :force => true do |t|
     t.string   "title"
     t.text     "desc"
-    t.integer  "album_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.string   "photo"
+    t.integer  "photoable_id"
+    t.string   "photoable_type"
   end
+
+  add_index "photos", ["photoable_id"], :name => "index_photos_on_photoable_id"
+  add_index "photos", ["photoable_type"], :name => "index_photos_on_photoable_type"
 
   create_table "places", :force => true do |t|
     t.string   "name"
