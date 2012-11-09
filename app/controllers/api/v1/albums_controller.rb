@@ -39,8 +39,8 @@ class Api::V1::AlbumsController < ApplicationController
 
   def destroy
     user = User.find_by_authentication_token(params[:auth_token])    
-    @album = user.albums.find(params[:id])
-    @album.destroy
+    album = user.albums.find(params[:id])
+    album.destroy
     render :json=>{:response => 'ok',:message => 'successfully  deleted'}
   	  #render :nothing, :status => 403
   end
