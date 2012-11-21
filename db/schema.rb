@@ -11,13 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121108090453) do
+ActiveRecord::Schema.define(:version => 20121121042356) do
 
   create_table "albums", :force => true do |t|
     t.string   "title"
     t.text     "desc"
     t.integer  "user_id"
-    t.integer  "place_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -65,6 +64,14 @@ ActiveRecord::Schema.define(:version => 20121108090453) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "pdfs", :force => true do |t|
+    t.string   "title"
+    t.text     "desc"
+    t.string   "pdf"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "photos", :force => true do |t|
     t.string   "title"
     t.text     "desc"
@@ -92,6 +99,11 @@ ActiveRecord::Schema.define(:version => 20121108090453) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.string   "photo"
+  end
+
+  create_table "places_users", :id => false, :force => true do |t|
+    t.integer "place_id"
+    t.integer "user_id"
   end
 
   create_table "provinces", :force => true do |t|
@@ -141,6 +153,7 @@ ActiveRecord::Schema.define(:version => 20121108090453) do
     t.string   "authentication_token"
     t.string   "private_token"
     t.string   "avatar"
+    t.integer  "favorite_place_ids",                                     :array => true
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

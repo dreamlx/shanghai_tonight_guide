@@ -79,7 +79,12 @@ RailsAdmin.config do |config|
 
   # All fields marked as 'hidden' won't be shown anywhere in the rails_admin unless you mark them as visible. (visible(true))
 
-
+  # config.model User do
+  #   configure :places do
+  #     inverse_of :users
+  #     # configuration here
+  #   end
+  # end
   # config.model Area do
   #   # Found associations:
   #   # Found columns:
