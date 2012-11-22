@@ -20,6 +20,8 @@ class Place < ActiveRecord::Base
   has_many :photos,:as=>:photoable
   #has_one :photo_thumb, :as => :assetable, :class_name => 'PlacePhoto'
   acts_as_commentable
+  # has_and_belongs_to_many :users
+
   mount_uploader :photo, PlacePhotoUploader
   paginates_per 10
   

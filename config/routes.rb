@@ -45,7 +45,9 @@ Rails3BootstrapDeviseCancan::Application.routes.draw do
 
       resources :photos         
 
-      resources :comments         
+      resources :comments   
+
+      resources :favoriteplaces      
 
     end		
   end
