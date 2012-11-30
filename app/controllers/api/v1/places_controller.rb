@@ -26,6 +26,15 @@ class Api::V1::PlacesController < ApplicationController
     render :json=>{:response => 'ok',:message => 'get one record',:result=>@item}
   end
 
+    def update
+      @place = Place.find(params[:id])
+      if @place.update_attributes(params[:place])
+        render :status=>:ok, :json => {:response => "ok",:message => 'successfully updated place',:place=>@place}
+      else
+        render :status=>401, :json => {:error => "update failed"}.to_json
+      end
+    end
+
   def destroy
   	render :nothing, :status => 403
   end

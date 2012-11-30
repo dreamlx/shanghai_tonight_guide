@@ -11,21 +11,21 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email,:avatar,:avatar_cache, :password, :password_confirmation, :remember_me, :authentication_token, :private_token, :favorite_place_ids 
   
-  rails_admin do
-    list do 
-      field :avatar do 
-        label "Photo"
-      end
-      field :name do 
-        label "Name"
-      end
-      field :email do
-        label "Email"
-      end
+  # rails_admin do
+  #   list do 
+  #     field :avatar do 
+  #       label "Photo"
+  #     end
+  #     field :name do 
+  #       label "Name"
+  #     end
+  #     field :email do
+  #       label "Email"
+  #     end
 
-    end
+  #   end
 
-  end
+  # end
 
   has_many :albums
   # has_and_belongs_to_many :places
