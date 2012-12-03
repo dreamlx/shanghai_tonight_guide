@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Comment < ActiveRecord::Base
 
   include ActsAsCommentable::Comment
@@ -12,4 +13,24 @@ class Comment < ActiveRecord::Base
   acts_as_commentable
   # NOTE: Comments belong to a user
   belongs_to :user
+  rails_admin do
+    list do 
+      field :title do 
+        label "标题"
+      end
+      field :comment do 
+        label "描叙"
+      end
+      field :user do
+        label "用户"
+      end
+      field :commentable do
+        label "被评论的对象"
+      end      
+      field :comments do
+        label "评论"
+      end
+    end
+
+  end
 end
