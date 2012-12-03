@@ -29,7 +29,11 @@ Rails3BootstrapDeviseCancan::Application.routes.draw do
       
       resources :girls
       
-      resources :places
+      resources :places do
+        collection do
+          get 'search'
+        end
+      end
 
       resources :categories
 
@@ -45,7 +49,11 @@ Rails3BootstrapDeviseCancan::Application.routes.draw do
 
       resources :photos         
 
-      resources :comments   
+      resources :comments do
+        member do
+          post 'comment_add'
+        end
+      end   
 
       resources :favoriteplaces      
 
