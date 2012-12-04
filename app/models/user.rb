@@ -1,3 +1,4 @@
+# encoding: utf-8
 class User < ActiveRecord::Base
   before_update :set_private_token
   rolify
@@ -14,10 +15,10 @@ class User < ActiveRecord::Base
   rails_admin do
     list do 
       field :avatar do 
-        label "Photo"
+        label "相片"
       end
       field :name do 
-        label "Name"
+        label "名称"
       end
       field :email do
         label "Email"

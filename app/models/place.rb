@@ -42,6 +42,13 @@ class Place < ActiveRecord::Base
       field :phone do
         label "聯繫電話"
       end
+      field :area do
+        label "区域"
+      end
+      field :category do
+        label "类别"
+      end
+
     end
 
   end
