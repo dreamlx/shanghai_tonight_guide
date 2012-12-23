@@ -1,6 +1,6 @@
 #coding: utf-8
 class Api::V1::AlbumsController < ApplicationController
-	before_filter :verify_authenticity_token
+	#before_filter :verify_authenticity_token
 	respond_to :json
   def index
     user = User.find_by_authentication_token(params[:auth_token])

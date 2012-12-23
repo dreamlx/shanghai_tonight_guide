@@ -1,11 +1,11 @@
 #coding: utf-8
 class Api::V1::CategoriesController < ApplicationController
-	before_filter :verify_authenticity_token
+	#before_filter :verify_authenticity_token
 	respond_to :json
   def index
     @items = Category.order(:name).page(params[:page])
 
-    render :json=>{:response => 'ok',:message => 'get all records',:result => @items, :last_page => @items.num_pages, :current_page => params[:page].to_i}
+    render :status => 200, :json=>{:response => 'get all records',:result => @items, :last_page => @items.num_pages, :current_page => params[:page].to_i}
   
   end
 
@@ -18,7 +18,7 @@ class Api::V1::CategoriesController < ApplicationController
 
   def show
   	@item = Category.find(params[:id])
-    render :json=>{:response => 'ok',:message => 'get one record',:result=>@item}
+    render :status => 200,:json=>{:response => 'got category',:result=>@item}
   end
 
   def destroy
