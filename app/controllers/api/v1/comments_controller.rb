@@ -4,21 +4,17 @@ class Api::V1::CommentsController < ApplicationController
 	respond_to :json
   def index
 
-    place = Place.find(params[:place_id])
-    if place
+    place = Place.where("id = ?",params[:place_id]).first
+    unless place.nil?
       @items = place.comments.page(params[:page])
 
-      render :json=>{:response => 'ok',:message => 'get all records',
+      render :status => 200, :json=>{:response => 'get all records',
         :result => @items, :last_page => @items.num_pages, 
         :current_page => params[:page].to_i
       }
     else
-      render :json=>{:response => 'failed',:message => 'place does not exist?'}, :status => 404
+      render :json=>{:error => 'place does not exist?'}, :status => 404
     end
-  end
-
-  def new
-  	render :nothing, :status => 403
   end
 
   def create
@@ -28,12 +24,10 @@ class Api::V1::CommentsController < ApplicationController
       @comment = place.comments.new(params[:comment])
       @comment.user_id = user.id
       @comment.save 
-      render :json => { :response => 'ok', :comment=>@comment}.to_json, :status => :ok      
+      render :json => { :response => 'ok', :comment=>@comment}.to_json, :status => 200     
     else
-      render :json=>{:response => 'failed',:message => 'place does not exist?'}, :status => 404
+      render :json=>{:error => 'failed',:message => 'place does not exist?'}, :status => 404
     end
-
-  	#render :nothing, :status => 403
   end
 
   def comment_add
@@ -43,22 +37,22 @@ class Api::V1::CommentsController < ApplicationController
       @comment = parent_comment.comments.new(params[:comment])
       @comment.user_id = user.id
       @comment.save 
-      render :json => { :response => 'ok', :comment=>@comment}.to_json, :status => :ok      
+      render :json => { :response => 'ok', :comment=>@comment}.to_json, :status => 200     
     else
-      render :json=>{:response => 'failed',:message => 'parent comment does not exist?'}, :status => 404
+      render :json=>{:error => 'failed',:message => 'parent comment does not exist?'}, :status => 404
     end    
   end
 
   def show
   	  @comment = Comment.find(params[:id])
-    render :json=>{:response => 'ok',:message => 'get one record',:result=>@comment}
+    render :json=>{:response => 'get one record',:result=>@comment}
   end
 
 
   def destroy
     @comment = Comment.find(params[:id])
     @comment.destroy
-    render :json=>{:response => 'ok',:message => 'successfully  deleted'}
+    render :json=>{:response => 'successfully  deleted'}
   	  #render :nothing, :status => 403
   end
 end

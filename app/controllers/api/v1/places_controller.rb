@@ -42,7 +42,7 @@ class Api::V1::PlacesController < ApplicationController
         :current_page => params[:page].to_i
       }
     else
-      render :json=>{:response => 'failed',:message => 'query condition is empty?'}, :status => 404
+      render :json=>{:error => 'query condition is empty?'}, :status => 404
     end
 
     
@@ -67,9 +67,9 @@ class Api::V1::PlacesController < ApplicationController
   def update
     @place = Place.find(params[:id])
     if @place.update_attributes(params[:place])
-      render :status=>:ok, :json => {:response => "ok",:message => 'successfully updated place',:place=>@place}
+      render :status=> 200, :json => {:response =>'successfully updated place',:place=>@place}
     else
-      render :status=>401, :json => {:error => "update failed"}.to_json
+      render :status=> 401, :json => {:error => "update failed"}.to_json
     end
   end
 
