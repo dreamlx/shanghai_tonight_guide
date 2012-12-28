@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.6'
 gem 'heroku'
 gem 'libv8'
-
+gem 'capistrano'
 #gem 'sqlite3'
 gem 'yaml_db'
 gem 'pg'
