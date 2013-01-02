@@ -56,9 +56,10 @@ class Api::V1::PlacesController < ApplicationController
   end
 
   def show
-    @item = Place.where("id = ? ",params[:id])
+    @item = Place.where("id = ? ",params[:id]).first
+    @photos= @item.photos
     unless @item.blank?
-      render :status => 200,:json=>{:response => 'got place',:result=>@item}
+      render :status => 200,:json=>{:response => 'got place',:result=>@item,:photos=> @photos}
     else
       render :status => 404,:json=>{:error => 'no found'}
     end
