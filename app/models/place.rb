@@ -27,9 +27,6 @@ class Place < ActiveRecord::Base
   
   rails_admin do
     list do 
-      field :photo do 
-        label "照片"
-      end
       field :name do 
         label "單位名稱"
       end
