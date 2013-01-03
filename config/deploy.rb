@@ -2,7 +2,7 @@ require 'bundler/capistrano'
 set :user, 'dreamlinx'
 set :domain, 'www.qiaobei.info'
 set :applicationdir, '/home/dreamlinx/shanghai_tonight_guide'
-set :application, "qiaobei"
+set :application, "www.qiaobei.info"
 set :scm, 'git'
 set :repository,  "git@github.com:dreamlx/shanghai_tonight_guide.git"
 set :git_enable_submodules, 1 # if you have vendored rails
@@ -24,7 +24,9 @@ set :deploy_via, :export
 
 # Passenger
 namespace :deploy do
-  task :start do ; end
+  task :start, :roles => :app do 
+    run "touch #{current_path}/tmp/restart.txt"
+  end
   task :stop do ; end
   task :restart, :roles => :app, :except => { :no_release => true } do
     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"

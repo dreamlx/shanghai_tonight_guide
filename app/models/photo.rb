@@ -1,9 +1,13 @@
 # encoding: utf-8
 class Photo < ActiveRecord::Base
-   attr_accessible :title, :desc, :photoable_id, :photoable_type ,:photo, :photo_cache, :remove_photo
+  attr_accessible :title, :desc, :photoable_id, :photoable_type ,:photo, :photo_cache, :remove_photo
   #belongs_to :album
   belongs_to :photoable ,:polymorphic => true
+  
+  after_save :replace_photo_of_place
+  
   mount_uploader :photo, AlbumPhotoUploader
+  
   rails_admin do
     list do 
       field :title do 
@@ -19,6 +23,16 @@ class Photo < ActiveRecord::Base
         label "相片"
       end
     end
+  end
+  
+  private
+  def replace_photo_of_place
 
-  end  
+        place = Place.find(self.photoable_id)
+        last_photo = place.photos.at(-1)
+        place.photo = last_photo
+        place.thumb_url = last_photo.photo.thumb.url
+        place.save
+
+  end
 end

@@ -39,7 +39,13 @@ class Api::V1::PhotosController < ApplicationController
 
   end
 
-
+  def show
+    @photo = Photo.find(params[:id])
+    render :json=>{:response => 'ok',:message => 'get all records',
+      :result => @photo
+      }, :status => 200
+  end
+  
   def destroy
     user = User.find_by_authentication_token(params[:auth_token])
 

@@ -9,20 +9,18 @@ class Place < ActiveRecord::Base
     :phone, 
     :name, 
     :price, 
-    :user_id
-    #:photo,
-    #:photo_cache,
-    #:remove_photo
+    :user_id,
+    :photo,
+    :photo_cache,
+    :remove_photo
   
   belongs_to :area
   belongs_to :category
-  #has_many :albums
   has_many :photos,:as=>:photoable
-  #has_one :photo_thumb, :as => :assetable, :class_name => 'PlacePhoto'
+  
+  before_destroy {|record| Photo.destroy_all "photoable_type = 'Place' and photoable_id = #{record.id}"}
   acts_as_commentable
-  # has_and_belongs_to_many :users
 
-  #mount_uploader :photo, PlacePhotoUploader
   paginates_per 10
   
   rails_admin do

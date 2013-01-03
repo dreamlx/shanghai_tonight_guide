@@ -4,5 +4,6 @@ class RemoveColumnFromPlace < ActiveRecord::Migration
   end
 
   def down
+    add_column :places, :photo, :string
   end
 end
