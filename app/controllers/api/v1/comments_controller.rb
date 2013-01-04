@@ -1,6 +1,6 @@
 #coding: utf-8
 class Api::V1::CommentsController < ApplicationController
-	before_filter :verify_authenticity_token
+	#before_filter :verify_authenticity_token
 	respond_to :json
   def index
 
@@ -13,6 +13,7 @@ class Api::V1::CommentsController < ApplicationController
         :current_page => params[:page].to_i
       }
     else
+      
       render :json=>{:error => 'place does not exist?'}, :status => 404
     end
   end
@@ -22,7 +23,7 @@ class Api::V1::CommentsController < ApplicationController
     place = Place.find(params[:place_id])
     if place
       @comment = place.comments.new(params[:comment])
-      @comment.user_id = user.id
+      @comment.user_id = user.id||""
       @comment.save 
       render :json => { :response => 'ok', :comment=>@comment}.to_json, :status => 200     
     else

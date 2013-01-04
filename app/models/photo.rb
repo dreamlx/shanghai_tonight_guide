@@ -31,7 +31,7 @@ class Photo < ActiveRecord::Base
         place = Place.find(self.photoable_id)
         last_photo = place.photos.at(-1)
         place.photo = last_photo
-        place.thumb_url = last_photo.photo.thumb.url
+        place.thumb_url = last_photo.photo.normal.url
         place.save
 
   end
