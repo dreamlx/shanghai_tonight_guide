@@ -5,19 +5,19 @@ class Api::V1::PhotosController < ApplicationController
   
   def index
     user = User.find_by_authentication_token(params[:auth_token])
-      case params[:album].downcase
+    case params[:album].downcase
 
-      when "place"
-        place = Place.find(params[:place_id])
-        @items = place.photos.page(params[:page])
+    when "place"
+      place = Place.find(params[:place_id])
+      @items = place.photos.page(params[:page])
 
-        render :json=>{:response => 'ok',:message => 'get all records',
-          :result => @items, :last_page => @items.num_pages, 
-          :current_page => params[:page].to_i
-        }        
-      else
-        render :json=>{:response => 'failed',:message => 'the photo belongs to what model? Album or Place'}, :status => 404
-      end
+      render :json=>{:response => 'ok',:message => 'get all records',
+        :result => @items, :last_page => @items.num_pages, 
+        :current_page => params[:page].to_i
+      }        
+    else
+      render :json=>{:response => 'failed',:message => 'the photo belongs to what model? Album or Place'}, :status => 404
+    end
 
   end
 
@@ -44,22 +44,21 @@ class Api::V1::PhotosController < ApplicationController
     render :json=>{:response => 'ok',:message => 'get all records',
       :result => @photo
       }, :status => 200
-  end
+    end
   
-  def destroy
-    user = User.find_by_authentication_token(params[:auth_token])
+    def destroy
+      user = User.find_by_authentication_token(params[:auth_token])
 
-    case params[:album].downcase    
+      case params[:album].downcase    
          
-    when "place"
-      place = Place.find(params[:place_id])
-      photo = place.photos.find(params[:id])
-      photo.destroy
+      when "place"
+        place = Place.find(params[:place_id])
+        photo = place.photos.find(params[:id])
+        photo.destroy
      
-      render :json=>{:response => 'ok',:message => 'successfully  deleted'}, :status => 200          
+        render :json=>{:response => 'ok',:message => 'successfully  deleted'}, :status => 200          
         
-      #render :nothing, :status => 403
+        #render :nothing, :status => 403
+      end
     end
   end
-  
-end

@@ -58,8 +58,21 @@ class Api::V1::PlacesController < ApplicationController
   def show
     @item = Place.where("id = ? ",params[:id]).first
     @photos= @item.photos
+    @comments = @item.comments
+    worth = 0
+    worthless = 0
+    
+    @comments.each do |comment|
+      if comment.rating
+        worth += 1 
+      else
+        worthless += 1
+      end
+    end
+    
     unless @item.blank?
-      render :status => 200,:json=>{:response => 'got place',:result=>@item,:photos=> @photos}
+      render :status => 200,:json=>{:response => 'got place',:result=>@item,:photos=> @photos, 
+        :comment_count => @comments.size, :worth => worth, :worthless => worthless }
     else
       render :status => 404,:json=>{:error => 'no found'}
     end

@@ -25,7 +25,7 @@ class Api::V1::CommentsController < ApplicationController
       @comment = place.comments.new(params[:comment])
       @comment.user_id = user.id||""
       @comment.save 
-      render :json => { :response => 'ok', :comment=>@comment}.to_json, :status => 200     
+      render :json => { :response => 'ok', :comment=>@comment, :user => user}.to_json, :status => 200     
     else
       render :json=>{:error => 'failed',:message => 'place does not exist?'}, :status => 404
     end
@@ -52,8 +52,11 @@ class Api::V1::CommentsController < ApplicationController
 
   def destroy
     @comment = Comment.find(params[:id])
-    @comment.destroy
-    render :json=>{:response => 'successfully  deleted'}
-  	  #render :nothing, :status => 403
+    if @comment.destroy
+      render :json=>{:response => 'successfully  deleted'}, :status => 200
+  	else
+      render :json=>{:error => 'not found this id'}, :status => 404
+    end  
+      #render :nothing, :status => 403
   end
 end
