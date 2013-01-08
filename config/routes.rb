@@ -47,7 +47,9 @@ Rails3BootstrapDeviseCancan::Application.routes.draw do
 
       resources :albums         
 
-      resources :photos         
+      resources :photos 
+      
+      resources :avatars        
 
       resources :comments do
         member do

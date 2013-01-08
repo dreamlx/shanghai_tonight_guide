@@ -1,7 +1,7 @@
 #coding: utf-8
 class Api::V1::CommentsController < ApplicationController
-	before_filter :verify_authenticity_token
-	respond_to :json
+  before_filter :verify_authenticity_token, :except =>[:show]
+  respond_to :json
   def index
 
     place = Place.where("id = ?",params[:place_id]).first
@@ -45,8 +45,9 @@ class Api::V1::CommentsController < ApplicationController
   end
 
   def show
-  	  @comment = Comment.find(params[:id])
-    render :json=>{:response => 'get one record',:result=>@comment}
+    @comment = Comment.find(params[:id])
+    user = User.find(@comment.user_id)
+    render :json=>{:response => 'get one record',:result=>@comment, :user => user}, :status => 200
   end
 
 
@@ -54,9 +55,9 @@ class Api::V1::CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     if @comment.destroy
       render :json=>{:response => 'successfully  deleted'}, :status => 200
-  	else
+    else
       render :json=>{:error => 'not found this id'}, :status => 404
     end  
-      #render :nothing, :status => 403
+    #render :nothing, :status => 403
   end
 end

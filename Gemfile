@@ -10,7 +10,7 @@ gem 'haml'
 gem 'therubyracer'
 gem 'carrierwave'
 gem 'rmagick'
-gem "mini_magick"
+#gem "mini_magick"
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'

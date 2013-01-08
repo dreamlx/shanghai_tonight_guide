@@ -41,24 +41,22 @@ class Api::V1::PhotosController < ApplicationController
 
   def show
     @photo = Photo.find(params[:id])
-    render :json=>{:response => 'ok',:message => 'get all records',
-      :result => @photo
-      }, :status => 200
-    end
+    render :json=>{:response => 'ok',:message => 'get all records',:result => @photo}, :status => 200
+  end
   
-    def destroy
-      user = User.find_by_authentication_token(params[:auth_token])
+  def destroy
+    user = User.find_by_authentication_token(params[:auth_token])
 
-      case params[:album].downcase    
+    case params[:album].downcase    
          
-      when "place"
-        place = Place.find(params[:place_id])
-        photo = place.photos.find(params[:id])
-        photo.destroy
+    when "place"
+      place = Place.find(params[:place_id])
+      photo = place.photos.find(params[:id])
+      photo.destroy
      
-        render :json=>{:response => 'ok',:message => 'successfully  deleted'}, :status => 200          
+      render :json=>{:response => 'ok',:message => 'successfully  deleted'}, :status => 200          
         
-        #render :nothing, :status => 403
-      end
+      #render :nothing, :status => 403
     end
   end
+end
