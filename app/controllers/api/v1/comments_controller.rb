@@ -7,7 +7,9 @@ class Api::V1::CommentsController < ApplicationController
     place = Place.where("id = ?",params[:place_id]).first
     unless place.nil?
       @items = place.comments.page(params[:page])
-
+      
+      @items.map{|item| item.user_name = item.user.name unless item.user.nil?}
+      
       render :status => 200, :json=>{:response => 'get all records',
         :result => @items, :last_page => @items.num_pages, 
         :current_page => params[:page].to_i

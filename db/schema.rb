@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130107093522) do
+ActiveRecord::Schema.define(:version => 20130116141141) do
 
   create_table "albums", :force => true do |t|
     t.string   "title"
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(:version => 20130107093522) do
     t.string   "recommend"
     t.string   "price"
     t.boolean  "rating"
+    t.string   "user_name"
   end
 
   add_index "comments", ["commentable_id"], :name => "index_comments_on_commentable_id"

@@ -12,7 +12,7 @@ class Api::V1::PlacesController < ApplicationController
   end
 
   def search
-    sql_query_str = ""
+    sql_query_str = "" 
     if params[:area_id]
       sql_query_str = sql_query_str+"and area_id = #{params[:area_id]} "
     end
@@ -37,6 +37,15 @@ class Api::V1::PlacesController < ApplicationController
 
       @items = Place.where(sql_query_final_str).page(params[:page])
 
+      @items.each do |item| 
+        @comments = item.comments
+        worth =  Comment.get_worth(@comments)
+        worthless = Comment.get_worthless(@comments)
+        
+        item["comment_count"] = item.comments.size
+        item["worth"] = worth
+        item["worthless"] = worthless
+      end
       render :status => 200, :json=>{:response => 'find places',
         :result => @items, :last_page => @items.num_pages, 
         :current_page => params[:page].to_i
@@ -59,35 +68,27 @@ class Api::V1::PlacesController < ApplicationController
     @item = Place.where("id = ? ",params[:id]).first
     @photos= @item.photos
     @comments = @item.comments
-    worth = 0
-    worthless = 0
-    
-    @comments.each do |comment|
-      if comment.rating
-        worth += 1 
-      else
-        worthless += 1
-      end
-    end
+    worth =  Comment.get_worth(@comments)
+    worthless = Comment.get_worthless(@comments)
     
     unless @item.blank?
       render :status => 200,:json=>{:response => 'got place',:result=>@item,:photos=> @photos, 
         :comment_count => @comments.size, :worth => worth, :worthless => worthless }
-    else
-      render :status => 404,:json=>{:error => 'no found'}
+      else
+        render :status => 404,:json=>{:error => 'no found'}
+      end
+    end
+
+    def update
+      @place = Place.find(params[:id])
+      if @place.update_attributes(params[:place])
+        render :status=> 200, :json => {:response =>'successfully updated place',:place=>@place}
+      else
+        render :status=> 401, :json => {:error => "update failed"}.to_json
+      end
+    end
+
+    def destroy
+      render :nothing, :status => 403
     end
   end
-
-  def update
-    @place = Place.find(params[:id])
-    if @place.update_attributes(params[:place])
-      render :status=> 200, :json => {:response =>'successfully updated place',:place=>@place}
-    else
-      render :status=> 401, :json => {:error => "update failed"}.to_json
-    end
-  end
-
-  def destroy
-    render :nothing, :status => 403
-  end
-end

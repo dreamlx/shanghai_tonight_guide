@@ -2,6 +2,7 @@
 class Comment < ActiveRecord::Base
 
   include ActsAsCommentable::Comment
+  
 
   belongs_to :commentable, :polymorphic => true
 
@@ -13,6 +14,19 @@ class Comment < ActiveRecord::Base
   acts_as_commentable
   # NOTE: Comments belong to a user
   belongs_to :user
+  
+  def self.get_worth(comments)
+    worth = 0
+    comments.each {|comment| worth += 1 if comment.rating } unless comments.nil?
+    return worth
+  end
+  
+  def self.get_worthless(comments)
+    worthless = 0
+    comments.each {|comment| worthless += 1 unless comment.rating } unless comments.nil?
+    return worthless
+  end
+  
   rails_admin do
     list do 
       field :title do 
