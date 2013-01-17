@@ -1,9 +1,4 @@
-# RVM bootstrap  
-$:.unshift(File.expand_path("~/.rvm/lib"))  
-require 'rvm/capistrano'  
-set :rvm_ruby_string, 'default@r32'#这个值是你要用rvm的gemset。名字要和系统里有的要一样。  
-set :rvm_type, :user # Don't use system-wide RVM  
-#这个不能少，否则部署不了。  
+
   
 
 default_run_options[:pty] = true  # Must be set for the password prompt
