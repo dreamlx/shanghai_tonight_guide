@@ -1,9 +1,7 @@
 source 'https://rubygems.org'
 gem 'rails', '3.2.6'
-gem 'heroku'
+#gem 'heroku'
 gem 'libv8'
-gem 'capistrano'
-#gem 'sqlite3'
 gem 'yaml_db'
 gem 'pg'
 gem 'haml'
@@ -33,3 +31,8 @@ gem 'kaminari' #翻頁插件，替代 will_pagenate
 gem 'acts_as_commentable', '3.0.1'
 gem 'postgres_ext'
 gem "highline"
+
+gem 'passenger'  
+group :development do  
+  gem 'capistrano'#in production environment, don't need this gem package.  
+end  
