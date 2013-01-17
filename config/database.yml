@@ -24,10 +24,16 @@ test: &test
   timeout: 5000
 
 production:
-  adapter: sqlite3
-  database: db/production.sqlite3
-  pool: 5
-  timeout: 5000
+    adapter: postgresql
+    host: localhost
+    port: 5432
+    username: postgres
+    password: 791126
+    database: tonightGuide
+    schema_search_path: public
+    encoding: utf8
+    template: template0
+
 
 cucumber:
   <<: *test

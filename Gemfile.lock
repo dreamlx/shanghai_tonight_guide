@@ -257,6 +257,7 @@ DEPENDENCIES
   factory_girl_rails (>= 3.5.0)
   haml
   heroku
+  highline
   jquery-rails
   kaminari
   launchy (>= 2.1.0)
