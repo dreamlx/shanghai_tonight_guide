@@ -32,3 +32,4 @@ gem "bootstrap-sass", ">= 2.0.4.0"
 gem 'kaminari' #翻頁插件，替代 will_pagenate
 gem 'acts_as_commentable', '3.0.1'
 gem 'postgres_ext'
+gem "highline"

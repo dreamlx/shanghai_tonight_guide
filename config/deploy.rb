@@ -1,37 +1,21 @@
-require 'bundler/capistrano'
-set :user, 'dreamlinx'
-set :domain, 'www.qiaobei.info'
-set :applicationdir, '/home/dreamlinx/shanghai_tonight_guide'
-set :application, "www.qiaobei.info"
-set :scm, 'git'
+default_run_options[:pty] = true  # Must be set for the password prompt
+                                  # from git to work
+ssh_options[:forward_agent] = true
+set :application, "qiaobei"
 set :repository,  "git@github.com:dreamlx/shanghai_tonight_guide.git"
-set :git_enable_submodules, 1 # if you have vendored rails
-set :branch, 'master'
-set :git_shallow_clone, 1
-set :scm_verbose, true
-
-# set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
+set :deploy_to, "/home/dreamlinx/tonight_guide"
+set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
+set :user, "dreamlinx"
+set :scm_passphrase, "spt2melx"
+set :branch, "master"
+set :deploy_via, :remote_cache
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
-role :web, "www.qiaobei.info"                          # Your HTTP server, Apache/etc
-role :app, "www.qiaobei.info"                          # This may be the same as your `Web` server
-role :db,  "www.qiaobei.info", :primary => true # This is where Rails migrations will run
-# role :db,  "your slave db-server here"
-
-# deploy config
-set :deploy_to, applicationdir
-set :deploy_via, :export
-
-# Passenger
-namespace :deploy do
-  task :start, :roles => :app do 
-    run "touch #{current_path}/tmp/restart.txt"
-  end
-  task :stop do ; end
-  task :restart, :roles => :app, :except => { :no_release => true } do
-    run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-  end
-end
+set :domain, "www.qiaobei.info"
+role :web, domain
+role :app, domain
+role :db,  domain, :primary => true # This is where Rails migrations will run
+role :db,  domain
 
 # if you want to clean up old releases on each deploy uncomment this:
 # after "deploy:restart", "deploy:cleanup"
@@ -40,10 +24,14 @@ end
 # these http://github.com/rails/irs_process_scripts
 
 # If you are using Passenger mod_rails uncomment this:
-# namespace :deploy do
-#   task :start do ; end
-#   task :stop do ; end
-#   task :restart, :roles => :app, :except => { :no_release => true } do
-#     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-#   end
-# end
+ namespace :deploy do
+   task :start do 
+     # nothing
+   end
+   task :stop do 
+     # nothing
+   end
+   task :restart, :roles => :app, :except => { :no_release => true } do
+     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
+   end
+ end
