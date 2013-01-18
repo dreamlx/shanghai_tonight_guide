@@ -6,6 +6,8 @@ class Photo < ActiveRecord::Base
   
   after_save :replace_photo_of_place
   
+  before_destroy :destroy_photo
+  
   mount_uploader :photo, AlbumPhotoUploader
   
   rails_admin do
@@ -27,12 +29,26 @@ class Photo < ActiveRecord::Base
   
   private
   def replace_photo_of_place
-
-        place = Place.find(self.photoable_id)
-        last_photo = place.photos.at(-1)
+    place = Place.find(self.photoable_id)
+    last_photo = place.photos.at(-1)
+    place.photo = last_photo
+    place.thumb_url = last_photo.photo.normal.url
+    place.save
+  end
+  
+  def destroy_photo
+    place = Place.find(self.photoable_id)
+    if self.photoable_id == place.photo.photoable_id then
+      last_photo = place.photos.at(-2)
+      if last_photo.nil?
+        place.photo =nil
+        place.thumb_url = nil
+      else
         place.photo = last_photo
         place.thumb_url = last_photo.photo.normal.url
         place.save
-
+      end
+    end
   end
+  
 end

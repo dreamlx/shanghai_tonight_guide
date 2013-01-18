@@ -8,6 +8,7 @@ gem 'haml'
 gem 'therubyracer'
 gem 'carrierwave'
 gem 'rmagick'
+gem 'thin'
 #gem "mini_magick"
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
