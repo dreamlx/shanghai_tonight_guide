@@ -2,24 +2,25 @@
 class Photo < ActiveRecord::Base
   attr_accessible :title, :desc, :photoable_id, :photoable_type ,:photo, :photo_cache, :remove_photo
   #belongs_to :album
-  belongs_to :photoable ,:polymorphic => true
+  belongs_to :photoable ,:polymorphic => true, :inverse_of => :photos
   
+  #call back
   after_save :replace_photo_of_place
-  
-  before_destroy :destroy_photo
+  after_destroy :replace_photo_of_place
   
   mount_uploader :photo, AlbumPhotoUploader
   
   rails_admin do
+    label "照片库"
     list do 
       field :title do 
         label "标题"
       end
       field :desc do 
-        label "描叙"
+        label "详细说明"
       end
       field :photoable do
-        label "相片父对象"
+        label "相片归属"
       end
       field :photo do
         label "相片"
@@ -31,24 +32,14 @@ class Photo < ActiveRecord::Base
   def replace_photo_of_place
     place = Place.find(self.photoable_id)
     last_photo = place.photos.at(-1)
-    place.photo = last_photo
-    place.thumb_url = last_photo.photo.normal.url
+    if last_photo.nil?
+      place.thumb_url =""
+    else
+      place.thumb_url = last_photo.photo.normal.url
+    end
     place.save
   end
   
-  def destroy_photo
-    place = Place.find(self.photoable_id)
-    if self.photoable_id == place.photo.photoable_id then
-      last_photo = place.photos.at(-2)
-      if last_photo.nil?
-        place.photo =nil
-        place.thumb_url = nil
-      else
-        place.photo = last_photo
-        place.thumb_url = last_photo.photo.normal.url
-        place.save
-      end
-    end
-  end
+
   
 end

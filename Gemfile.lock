@@ -255,6 +255,7 @@ DEPENDENCIES
   database_cleaner (>= 0.8.0)
   devise (>= 2.1.2)
   email_spec (>= 1.2.1)
+  execjs
   factory_girl_rails (>= 3.5.0)
   haml
   highline

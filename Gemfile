@@ -5,6 +5,8 @@ gem 'libv8'
 gem 'yaml_db'
 gem 'pg'
 gem 'haml'
+
+gem 'execjs'
 gem 'therubyracer'
 gem 'carrierwave'
 gem 'rmagick'

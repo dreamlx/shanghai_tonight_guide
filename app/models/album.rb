@@ -1,11 +1,13 @@
 # encoding: utf-8
 class Album < ActiveRecord::Base
   # attr_accessible :title, :body
-    attr_accessible :title, :desc, :user_id
+  attr_accessible :title, :desc, :user_id
   has_many :photos,:as=>:photoable
   belongs_to :user
-  #belongs_to :place
+
   rails_admin do
+    parent "Photo"
+    label "用户相册"
     list do 
       field :title do 
         label "标题"

@@ -5,6 +5,7 @@ class Area < ActiveRecord::Base
   has_many :places
 
   rails_admin do
+    parent "City"
     list do 
       field :name do 
         label "名称"
