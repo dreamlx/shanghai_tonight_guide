@@ -43,6 +43,8 @@ Rails3BootstrapDeviseCancan::Application.routes.draw do
           get 'search'
         end
       end
+      
+      resources :devices
 
       resources :categories
 

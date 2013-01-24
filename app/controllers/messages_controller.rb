@@ -51,11 +51,11 @@ class MessagesController < ApplicationController
     # this is also the default. Shouldn't ever have to set this, but just in case Apple goes crazy, you can.
     # send
     
-    device_tokens = Device.all
-    device_tokens.each do|device_token|
+    devices = Device.all
+    devices.each do|device|
       #device_token = "d5c46e49 01412d0d 749c2721 389887d9 798f58b3 daab240a 8e789129 4eccf9e8"
-      unless device_token.desc.nil?
-        APNS.send_notification(device_token.desc, @message.title + ": " + @message.body) 
+      unless device.device_token.nil?
+        APNS.send_notification(device.device_token, @message.title + ": " + @message.body) 
       end
     end
     redirect_to @message, notice: 'Message was successfully created.'

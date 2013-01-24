@@ -8,7 +8,7 @@ class Api::V1::DevicesController < ApplicationController
   end
   
   def create
-    token = Device.create(:desc => params[:device_token])
+    token = Device.create(params[:device])
     token.save
     render :json => { :response => token }.to_json, :status => 200     
   end

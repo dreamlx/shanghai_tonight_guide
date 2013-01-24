@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130124064440) do
+ActiveRecord::Schema.define(:version => 20130124082016) do
 
   create_table "albums", :force => true do |t|
     t.string   "title"
@@ -61,9 +61,9 @@ ActiveRecord::Schema.define(:version => 20130124064440) do
 
   create_table "devices", :force => true do |t|
     t.string   "device_id"
-    t.text     "desc"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.text     "device_token"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "girls", :force => true do |t|

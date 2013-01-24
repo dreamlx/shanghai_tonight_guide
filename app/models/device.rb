@@ -1,3 +1,3 @@
 class Device < ActiveRecord::Base
-  attr_accessible :body, :device_id
+  attr_accessible :device_id, :device_token
 end
