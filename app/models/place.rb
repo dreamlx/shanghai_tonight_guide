@@ -42,7 +42,9 @@ class Place < ActiveRecord::Base
     field :price do
       label "参考价格"
     end
-
+    field :thumb_url do
+      label "第一张照片"
+    end
     field :area do
       label "地区"
     end
@@ -59,9 +61,7 @@ class Place < ActiveRecord::Base
     field :photos do
       label "场所照片"
     end
-    field :thumb_url do
-      label "第一张照片"
-    end
+
     
 
   end

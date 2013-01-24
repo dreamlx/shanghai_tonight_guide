@@ -1,4 +1,6 @@
 Rails3BootstrapDeviseCancan::Application.routes.draw do
+  resources :messages
+
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
   resources :places
@@ -14,6 +16,13 @@ Rails3BootstrapDeviseCancan::Application.routes.draw do
   resources :albums
 
   resources :photos
+  
+  resources :messages do
+    member do
+      get 'send_me'
+    end
+    
+  end
 
   #authenticated :user do
   #	root :to => 'home#index'

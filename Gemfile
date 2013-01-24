@@ -5,7 +5,7 @@ gem 'libv8'
 gem 'yaml_db'
 gem 'pg'
 gem 'haml'
-
+gem 'apns' # app push notification
 gem 'execjs'
 gem 'therubyracer'
 gem 'carrierwave'

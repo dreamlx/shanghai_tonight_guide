@@ -17,6 +17,8 @@ RailsAdmin.config do |config|
 
   # Set the admin name here (optional second array element will appear in a beautiful RailsAdmin red ©)
   config.main_app_name = ['night guide', 'Admin']
+
+  
   # or for a dynamic name:
   # config.main_app_name = Proc.new { |controller| [Rails.application.engine_name.titleize, controller.params['action'].titleize] }
 
@@ -227,4 +229,5 @@ RailsAdmin.config do |config|
   #   create do; end
   #   update do; end
   # end
+
 end
