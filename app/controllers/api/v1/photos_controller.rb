@@ -31,7 +31,7 @@ class Api::V1::PhotosController < ApplicationController
       if @photo.save 
         render :json => { :response => 'uploaded a photo', :photo=>@photo}.to_json, :status => 200     
       else
-        render :json => { :error => @photo.errors}.to_json, :status => 403    
+        render :json => { :error => @photo.errors.full_messages}.to_json, :status => 403    
       end
     else
       render :json=>{:response => 'failed',:message => 'the photo belongs to what model? Album or Place'}, :status => 404

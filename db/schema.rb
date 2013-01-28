@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130124082016) do
+ActiveRecord::Schema.define(:version => 20130126155801) do
 
   create_table "albums", :force => true do |t|
     t.string   "title"
@@ -65,6 +65,8 @@ ActiveRecord::Schema.define(:version => 20130124082016) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
+
+  add_index "devices", ["device_token"], :name => "index_devices_on_device_token", :unique => true
 
   create_table "girls", :force => true do |t|
     t.string   "name"

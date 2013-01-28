@@ -16,7 +16,7 @@ RailsAdmin.config do |config|
   # config.audit_with :paper_trail, User
 
   # Set the admin name here (optional second array element will appear in a beautiful RailsAdmin red ©)
-  config.main_app_name = ['night guide', 'Admin']
+  config.main_app_name = ['NightLife guide', 'Admin']
 
   
   # or for a dynamic name:

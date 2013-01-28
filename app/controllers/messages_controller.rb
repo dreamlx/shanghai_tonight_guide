@@ -40,16 +40,8 @@ class MessagesController < ApplicationController
   
   #get member
   def send_me
+    init_apns
     @message = Message.find(params[:id])
-    #APNS.host = 'gateway.push.apple.com' 
-    # gateway.sandbox.push.apple.com is default
-
-    APNS.pem  = Rails.root.to_s + "/public/certification/cert.pem"
-    # this is the file you just created
-    
-    APNS.port = 2195 
-    # this is also the default. Shouldn't ever have to set this, but just in case Apple goes crazy, you can.
-    # send
     
     devices = Device.all
     devices.each do|device|

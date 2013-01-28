@@ -68,7 +68,9 @@ Rails3BootstrapDeviseCancan::Application.routes.draw do
         end
       end   
 
-      resources :favoriteplaces      
+      resources :favoriteplaces 
+      
+      resources :apns     
 
     end		
   end
