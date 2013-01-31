@@ -36,7 +36,7 @@ class Api::V1::TokensController  < ApplicationController
       #logger.info("User #{email} failed signin, password \"#{password}\" is invalid")
       render :status=>401, :json=>{:error=>"Invalid email or password."}
     else
-      render :json => { :response => 'ok', :user=>@user,:auth_token => @user.authentication_token }.to_json, :status => :ok	
+      render :json => { :response => 'ok', :user=>@user,:auth_token => @user.authentication_token,:device_token => @user.device_token }.to_json, :status => :ok	
       #render :status=>200, :json=>{:token=>@user.authentication_token}
     end
   end
