@@ -1,6 +1,6 @@
-#require 'bundler/capistrano' 
-  
-
+#require 'bundler/capistrano'   
+#set :rvm_ruby_string, 'default@default'
+#set :rvm_type, :user
 default_run_options[:pty] = true  # Must be set for the password prompt
                                   # from git to work
 ssh_options[:forward_agent] = true
@@ -27,6 +27,7 @@ role :db,  domain
 # these http://github.com/rails/irs_process_scripts
 
 # If you are using Passenger mod_rails uncomment this:
+
  namespace :deploy do
    task :start do 
      # nothing

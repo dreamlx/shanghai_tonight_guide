@@ -45,12 +45,15 @@ class MessagesController < ApplicationController
     
     devices = Device.all
     devices.each do|device|
-      #device_token = "d5c46e49 01412d0d 749c2721 389887d9 798f58b3 daab240a 8e789129 4eccf9e8"
+      
       unless device.device_token.nil?
-        APNS.send_notification(device.device_token, @message.title + ": " + @message.body) 
+        badge_count = device.badge_count||0
+        device.update_attributes(:badge_count => badge_count+1)
+        APNS.send_notification(device.device_token,:alert => @message.title + ": " + @message.body, :sound => 'default', :badge=>badge_count) 
       end
     end
-    redirect_to @message, notice: 'Message was successfully created.'
+    flash[:notice]= 'Message was successfully sent.'
+    redirect_to :action => 'index'
   end
   
   

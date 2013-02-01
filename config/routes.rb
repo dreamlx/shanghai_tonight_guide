@@ -44,7 +44,11 @@ Rails3BootstrapDeviseCancan::Application.routes.draw do
         end
       end
       
-      resources :devices
+      resources :devices do
+        collection do
+          put 'empty_badge'
+        end
+      end
 
       resources :categories
 
