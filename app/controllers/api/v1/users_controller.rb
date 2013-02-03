@@ -28,10 +28,15 @@ class Api::V1::UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update_attributes(params[:user])
-      render :status=>200, :json => {:response => 'successfully updated user',:user=>@user}
+  
+    if @user.valid_password?(params[:password_current]) 
+      if @user.update_attributes(params[:user])
+        render :status=>200, :json => {:response => 'successfully updated user',:user=>@user}
+      else
+        render :status=>403, :json => {:error => @user.errors.messages}.to_json
+      end
     else
-      render :status=>403, :json => {:error => @user.errors.messages}.to_json
+      render :status=>403, :json => {:error => "invalid password, please check password_current"}.to_json
     end
   end
 

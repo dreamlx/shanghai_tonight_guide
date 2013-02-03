@@ -33,7 +33,7 @@ class Api::V1::PlacesController < ApplicationController
     end
 
     if !sql_query_str.empty?
-      sql_query_final_str = sql_query_str.sub("and","")
+      sql_query_final_str = sql_query_str.sub("and","") #sub 替换第一个，gsub替换全部
 
       @items = Place.where(sql_query_final_str).page(params[:page])
 
@@ -46,6 +46,9 @@ class Api::V1::PlacesController < ApplicationController
         item["worth"] = worth
         item["worthless"] = worthless
       end
+      
+      order_name = params[:order_by]
+      @items.sort!{|a,b| a["#{order_name}"] <=> b["#{order_name}"]} if params[:order_by]
       render :status => 200, :json=>{:response => 'find places',
         :result => @items, :last_page => @items.num_pages, 
         :current_page => params[:page].to_i
