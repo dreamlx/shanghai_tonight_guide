@@ -10,7 +10,8 @@ class Place < ActiveRecord::Base
   :name, 
   :price, 
   :user_id,
-  :thumb_url
+  :thumb_url,
+  :audit
   belongs_to :area
   belongs_to :category
 
@@ -62,6 +63,9 @@ class Place < ActiveRecord::Base
       label "场所照片"
     end
 
+    field :audit do
+      label "审核"
+    end
     
 
   end

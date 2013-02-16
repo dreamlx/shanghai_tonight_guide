@@ -43,6 +43,7 @@ class Api::V1::PlacesController < ApplicationController
         worthless = Comment.get_worthless(@comments)
         
         item["comment_count"] = item.comments.size
+        item["photo_count"] = item.photos.count
         item["worth"] = worth
         item["worthless"] = worthless
       end
