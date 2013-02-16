@@ -46,6 +46,7 @@ class Api::V1::PlacesController < ApplicationController
         item["photo_count"] = item.photos.count
         item["worth"] = worth
         item["worthless"] = worthless
+        item["order_price"]= item.price
       end
       
       order_name = params[:order_by]
