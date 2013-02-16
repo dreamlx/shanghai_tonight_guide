@@ -15,6 +15,10 @@ set :deploy_via, :remote_cache
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
 set :domain, "www.qiaobei.info"
+
+set :current_public "/home/dreamlinx/tonight_guide/current/public"
+set :shared_public, "/home/dreamlinx/tonight_guide/shared/public"
+
 role :web, domain
 role :app, domain
 role :db,  domain, :primary => true # This is where Rails migrations will run
@@ -31,7 +35,7 @@ role :db,  domain
 namespace :deploy do
   task :copy_photo_files do
     run "rm -rf #{current_public}/uploads"
-    run "ln -s #{shared_path}/public/uploads #{current_public}/uploads"     
+    run "ln -s #{shared_public}/uploads #{current_public}/uploads"     
   end  
      
   task :start do 
