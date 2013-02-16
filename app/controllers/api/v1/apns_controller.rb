@@ -10,7 +10,7 @@ class Api::V1::ApnsController < ApplicationController
     if apns_messages and device_token
       badge_count = device.badge_count||0
       device.update_attributes(:badge_count => badge_count+1)
-      APNS.send_notification(device_token, :alert => apns_messages, :sound => 'default', :badge=>badge_count))
+      APNS.send_notification(device_token, :alert => apns_messages, :sound => 'default', :badge=>badge_count)
       render :status => 200, :json => { :response => "sent message", :device_token => device_token, :messages =>apns_messages }.to_json  
     else
       render :status =>403, :json =>{:errors =>"message or device_token is null"}

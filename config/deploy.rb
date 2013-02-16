@@ -2,7 +2,7 @@
 #set :rvm_ruby_string, 'default@default'
 #set :rvm_type, :user
 default_run_options[:pty] = true  # Must be set for the password prompt
-                                  # from git to work
+# from git to work
 ssh_options[:forward_agent] = true
 set :application, "qiaobei"
 set :repository,  "git@github.com:dreamlx/shanghai_tonight_guide.git"
@@ -28,14 +28,21 @@ role :db,  domain
 
 # If you are using Passenger mod_rails uncomment this:
 
- namespace :deploy do
-   task :start do 
-     # nothing
-   end
-   task :stop do 
-     # nothing
-   end
-   task :restart, :roles => :app, :except => { :no_release => true } do
-     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-   end
- end
+namespace :deploy do
+  task :copy_photo_files do
+    run "rm -rf #{current_public}/uploads"
+    run "ln -s #{shared_path}/public/uploads #{current_public}/uploads"     
+  end  
+     
+  task :start do 
+    # nothing
+  end
+  task :stop do 
+    # nothing
+  end
+  task :restart, :roles => :app, :except => { :no_release => true } do
+    run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
+  end
+end
+
+#after "deploy:update_code", "deploy:copy_config_files" # 如果將database.yml放在shared下，請打開  
