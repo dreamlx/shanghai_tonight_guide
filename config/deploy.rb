@@ -16,7 +16,7 @@ set :deploy_via, :remote_cache
 
 set :domain, "www.qiaobei.info"
 
-set :current_public "/home/dreamlinx/tonight_guide/current/public"
+set :current_public, "/home/dreamlinx/tonight_guide/current/public"
 set :shared_public, "/home/dreamlinx/tonight_guide/shared/public"
 
 role :web, domain
@@ -49,4 +49,5 @@ namespace :deploy do
   end
 end
 
-#after "deploy:update_code", "deploy:copy_config_files" # 如果將database.yml放在shared下，請打開  
+after "deploy:create_symlink", "deploy:copy_photo_files"
+#after "deploy:create_symlink", "deploy:copy_config_files" # 如果將database.yml放在shared下，請打開  
