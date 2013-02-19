@@ -16,7 +16,8 @@ class Place < ActiveRecord::Base
   belongs_to :category
 
   has_many :photos,:as=>:photoable, :dependent => :destroy, :inverse_of => :photoable
-  
+  has_many :reports
+  has_many :orders
   def photo
     p = self.photos.first
   end

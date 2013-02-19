@@ -47,10 +47,11 @@ class Api::V1::PlacesController < ApplicationController
         item["worth"] = worth
         item["worthless"] = worthless
         item["order_price"]= item.price
+        item["area_name"] = item.area.name
       end
       
       order_name = params[:order_by]
-      @items.sort!{|a,b| a["#{order_name}"] <=> b["#{order_name}"]} if params[:order_by]
+      @items.sort!{|a,b| a["#{order_name}"].to_i <=> b["#{order_name}"].to_i} if params[:order_by]
       render :status => 200, :json=>{:response => 'find places',
         :result => @items, :last_page => @items.num_pages, 
         :current_page => params[:page].to_i
@@ -65,7 +66,7 @@ class Api::V1::PlacesController < ApplicationController
   def create
     @place = Place.new(params[:place])
     @place.save
-    render :json => { :response => 'ok', :place=>@place}.to_json, :status => :ok      
+    render :json => { :response => 'ok', :place=>@place}.to_json, :status => 200   
     #render :nothing, :status => 403
   end
 

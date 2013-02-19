@@ -1,6 +1,8 @@
 # encoding: utf-8
 class User < ActiveRecord::Base
   before_update :set_private_token
+  has_many :reports
+  validates_uniqueness_of :name
   rolify
   
   mount_uploader :avatar, AvatarUploader

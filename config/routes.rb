@@ -1,4 +1,6 @@
 Rails3BootstrapDeviseCancan::Application.routes.draw do
+  resources :orders
+
   resources :messages
 
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
@@ -49,7 +51,11 @@ Rails3BootstrapDeviseCancan::Application.routes.draw do
           put 'empty_badge'
         end
       end
-
+      
+      resources :orders
+      
+      resources :reports
+      
       resources :categories
 
       resources :provinces
