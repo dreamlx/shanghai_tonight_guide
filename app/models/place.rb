@@ -11,9 +11,10 @@ class Place < ActiveRecord::Base
   :price, 
   :user_id,
   :thumb_url,
-  :audit
-  belongs_to :area
-  belongs_to :category
+  :audit,
+  :photo_ids
+  belongs_to :area,:inverse_of => :places
+  belongs_to :category,:inverse_of => :places
 
   has_many :photos,:as=>:photoable, :dependent => :destroy, :inverse_of => :photoable
   has_many :reports
@@ -21,17 +22,23 @@ class Place < ActiveRecord::Base
   def photo
     p = self.photos.first
   end
-  #accepts_nested_attributes_for :photos, :allow_destroy => true
-  #attr_accessible :photos_attributes, :allow_destroy => true
       
   before_destroy {|record| Photo.destroy_all "photoable_type = 'Place' and photoable_id = #{record.id}"}
   acts_as_commentable
 
   paginates_per 10
 
+  
   rails_admin do
     label "场所"
     parent "Area"
+
+    field :category do
+      label "场所分类"
+      searchable true
+      inverse_of :places
+    end
+    
     field :name do
       label "场所名字"
     end
@@ -49,11 +56,9 @@ class Place < ActiveRecord::Base
     end
     field :area do
       label "地区"
+      inverse_of :places
     end
-    field :category do
-      label "场所分类"
-    end
-
+    
     field :glng do
       label "位置经度"
     end

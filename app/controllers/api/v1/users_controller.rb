@@ -36,7 +36,7 @@ class Api::V1::UsersController < ApplicationController
       render :status=>403, :json => {:error => @user.errors.messages}.to_json
     end
   else
-    render :status=>403, :json => {:error => "current password not match"}.to_json
+    render :status=>403, :json => {:error => "current password not match"}
   end
   end
 
