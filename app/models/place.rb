@@ -19,6 +19,8 @@ class Place < ActiveRecord::Base
   has_many :photos,:as=>:photoable, :dependent => :destroy, :inverse_of => :photoable
   has_many :reports
   has_many :orders
+  
+  
   def photo
     p = self.photos.first
   end
@@ -53,6 +55,9 @@ class Place < ActiveRecord::Base
     end
     field :thumb_url do
       label "第一张照片"
+      formatted_value do
+        bindings[:view].tag(:img, { :src => bindings[:object].thumb_url }) 
+      end
     end
     field :area do
       label "地区"
