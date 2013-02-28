@@ -2,7 +2,7 @@
 class User < ActiveRecord::Base
   before_update :set_private_token
   has_many :reports
-  validates_uniqueness_of :username
+  validates_uniqueness_of :name
   rolify
   
   mount_uploader :avatar, AvatarUploader
@@ -14,9 +14,10 @@ class User < ActiveRecord::Base
   
   attr_accessor :login
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :username, :email,:avatar,:avatar_cache, :password, 
+  attr_accessible :name, :email,:avatar,:avatar_cache, :password, 
   :password_confirmation, :remember_me, :authentication_token, 
   :private_token, :favorite_place_ids, :device_token,:login,:mobile
+  
   rails_admin do
     list do 
       field :avatar do 
