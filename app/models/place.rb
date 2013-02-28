@@ -40,9 +40,20 @@ class Place < ActiveRecord::Base
       searchable true
       inverse_of :places
     end
-    
+    field :thumb_url do
+      label "第一张照片"
+      formatted_value do
+        bindings[:view].tag(:img, { :src => bindings[:object].thumb_url }) 
+      end
+    end
     field :name do
       label "场所名字"
+    end
+    field :glng do
+      label "位置经度"
+    end
+    field :glat do
+      label "位置纬度"
     end
     field :address do
       label "地址"
@@ -53,23 +64,13 @@ class Place < ActiveRecord::Base
     field :price do
       label "参考价格"
     end
-    field :thumb_url do
-      label "第一张照片"
-      formatted_value do
-        bindings[:view].tag(:img, { :src => bindings[:object].thumb_url }) 
-      end
-    end
+
     field :area do
       label "地区"
       inverse_of :places
     end
     
-    field :glng do
-      label "位置经度"
-    end
-    field :glat do
-      label "位置纬度"
-    end
+
     field :photos do
       label "场所照片"
     end

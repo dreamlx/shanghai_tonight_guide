@@ -2,7 +2,7 @@
 class User < ActiveRecord::Base
   before_update :set_private_token
   has_many :reports
-  validates_uniqueness_of :name
+  validates_uniqueness_of :username
   rolify
   
   mount_uploader :avatar, AvatarUploader
@@ -11,12 +11,12 @@ class User < ActiveRecord::Base
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :token_authenticatable,
   :recoverable, :rememberable, :trackable, :validatable
-
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email,:avatar,:avatar_cache, :password, 
-  :password_confirmation, :remember_me, :authentication_token, 
-  :private_token, :favorite_place_ids, :device_token 
   
+  attr_accessor :login
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :username, :email,:avatar,:avatar_cache, :password, 
+  :password_confirmation, :remember_me, :authentication_token, 
+  :private_token, :favorite_place_ids, :device_token,:login,:mobile
   rails_admin do
     list do 
       field :avatar do 
@@ -41,6 +41,16 @@ class User < ActiveRecord::Base
     random_key = "#{SecureRandom.hex(10)}:#{self.id}"
     self.update_attribute(:private_token, random_key)
   end 
+  
+  def self.find_first_by_auth_conditions(warden_conditions)
+    conditions = warden_conditions.dup
+    if login = conditions.delete(:login)
+      where(conditions).where(["lower(mobile) = :value OR lower(email) = :value", { :value => login.downcase }]).first
+    else
+      where(conditions).first
+    end
+  end
+  
   
   private
   
